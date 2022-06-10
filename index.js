@@ -14,17 +14,17 @@ const connection = new Pool({
 const app = express();
 app.use(express.json());
 
-app.post('/signup',async  (req, res) => {
+app.post('/signup',  (req, res) => {
     const { name, email, password,confirmpassword } = req.body;
-    try{
-      await connection.query('INSERT INTO signup (name, email, password,confirmpassword) VALUES ($1, $2, $3,$4);', [name, email, password,confirmpassword])
+    
+      connection.query('INSERT INTO signup (name, email, password,confirmpassword) VALUES ($1, $2, $3,$4);', [name, email, password,confirmpassword])
       console.log('oi')
       .then(result => {
         res.sendStatus(201);
     });
-    }catch(e){
-
-    }
+    
+      console.log('oi2')
+    
     
 });
 app.post('/signin',async  (req, res) => {
@@ -98,6 +98,6 @@ app.get('/users/ranking',async  (req, res) => {
 });
 
 
-app.listen(4000, () => {
+app.listen(5000, () => {
   console.log('Server listening on port.');
 });
