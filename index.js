@@ -4,7 +4,7 @@ import pg from 'pg';
 const { Pool } = pg;
 
 const connection = new Pool({
-  user: 'shortly',
+  user: 'postgres',
   host: 'localhost',
   port: 5432, 
   database: 'shortly',
@@ -14,17 +14,17 @@ const connection = new Pool({
 const app = express();
 app.use(express.json());
 
-app.post('/signup',  (req, res) => {
+app.post('/signup',async  (req, res) => {
     const { name, email, password,confirmpassword } = req.body;
-    
-      connection.query('INSERT INTO signup (name, email, password,confirmpassword) VALUES ($1, $2, $3,$4);', [name, email, password,confirmpassword])
-      console.log('oi')
+    try{
+      await connection.query('INSERT INTO signup (name, email, password,confirmpassword) VALUES ($1, $2, $3,$4);', [name, email, password,confirmpassword])
+     
       .then(result => {
         res.sendStatus(201);
     });
-    
+  }catch(e){
       console.log('oi2')
-    
+  }
     
 });
 app.post('/signin',async  (req, res) => {
