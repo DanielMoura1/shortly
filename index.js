@@ -8,7 +8,7 @@ const connection = new Pool({
   host: 'localhost',
   port: 5432, 
   database: 'shortly',
-  password: 'danielmoura'
+  password: ''
 });
 
 const app = express();
