@@ -4,11 +4,11 @@ import pg from 'pg';
 const { Pool } = pg;
 
 const connection = new Pool({
-  user: 'bootcamp_role',
+  user: 'shortly',
   host: 'localhost',
   port: 5432, 
   database: 'shortly',
-  password: ''
+  password: 'danielmoura'
 });
 
 const app = express();
@@ -18,6 +18,7 @@ app.post('/signup',async  (req, res) => {
     const { name, email, password,confirmpassword } = req.body;
     try{
       await connection.query('INSERT INTO signup (name, email, password,confirmpassword) VALUES ($1, $2, $3,$4);', [name, email, password,confirmpassword])
+      console.log('oi')
       .then(result => {
         res.sendStatus(201);
     });
